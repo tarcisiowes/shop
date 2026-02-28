@@ -12,5 +12,20 @@ export const styles = StyleSheet.create({
 	Logo: {
 		height: 34,
 		width: 134,
+	},
+	form: {
+		width: '100%',
+		marginTop: 42,
+		gap: 7,
+		paddingHorizontal: 16,
+	},
+	content: {
+		flex: 1,
+		width: '100%',
+		marginTop: 24,
+		backgroundColor: '#ffffff',
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24,
+		padding: 24,
 	}
 });
