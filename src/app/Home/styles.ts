@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		paddingTop: 62,
-		padding: 24,
 	},
 	Logo: {
 		height: 34,
@@ -27,5 +26,21 @@ export const styles = StyleSheet.create({
 		borderTopLeftRadius: 24,
 		borderTopRightRadius: 24,
 		padding: 24,
+	},
+	header: {
+		width: '100%',
+		flexDirection: 'row',
+		gap: 12,
+		borderBottomWidth: 1,
+		borderBottomColor: '#e4e6ec',
+		padding: 12,
+	},
+	clearButton: {
+		marginLeft: 'auto',
+	},
+	clearText: {
+		fontSize: 12,
+		fontWeight: '600',
+		color: '#2c46b1',
 	}
 });

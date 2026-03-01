@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { Filter } from "@/components/Filter";
 import { Input } from "@/components/Input";
 import { FilterStatus } from "@/Types/FilterStatus";
-import { Image, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from "./styles";
 
 const FILTERS_STATUS: FilterStatus[] = [
