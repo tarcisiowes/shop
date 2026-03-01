@@ -19,11 +19,14 @@ export function Home() {
 				<Button title={'Add'} onPress={() => console.log("Add")}/>
 			</View>
 			<View style={styles.content}>
-				<Filter status={FilterStatus.DONE} isActive={true}/>
-				<Filter status={FilterStatus.PENDING} isActive={false}/>
+				<View style={styles.header}>
 					{FILTERS_STATUS.map((status) => (
 						<Filter key={status} status={status} isActive={status === FilterStatus.DONE}/>
 					))}
+					<TouchableOpacity style={styles.clearButton} onPress={() => console.log("Clear")}>
+						<Text style={styles.clearText}>Clear</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		</View>
 	);
