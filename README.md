@@ -1,4 +1,4 @@
-# 🛒 Shoply — Smart Shopping List App (React Native + Expo Go)
+# 🛒 Shop — Smart Shopping List App (React Native + Expo Go)
 
 A mobile app to help you create and manage shopping lists quickly, with a modern React Native experience powered by **Expo Go**.
 
