@@ -3,7 +3,7 @@ import { Filter } from "@/components/Filter";
 import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
 import { FilterStatus } from "@/Types/FilterStatus";
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from "./styles";
 
 const FILTERS_STATUS: FilterStatus[] = [
@@ -29,11 +29,15 @@ export function Home() {
 						<Text style={styles.clearText}>Clear</Text>
 					</TouchableOpacity>
 				</View>
-				<Item
-					data={{status: FilterStatus.DONE, description: 'Coffee'}}
-					onStatusChange={() => console.log("Status change")}
-					onDelete={() => console.log("Delete")}
-				/>
+				<FlatList
+					data={ITEMS}
+					keyExtractor={(item) => item}
+					renderItem={({item}) => (
+						<Item
+							data={{status: FilterStatus.DONE, description: 'Coffee'}}
+							onStatusChange={() => console.log("Status change")}
+							onDelete={() => console.log("Delete")}
+						/>)}/>
 			</View>
 		</View>
 	);
