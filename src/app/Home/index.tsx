@@ -9,7 +9,8 @@ import { styles } from "./styles";
 const FILTERS_STATUS: FilterStatus[] = [
 	FilterStatus.DONE,
 	FilterStatus.PENDING
-]
+];
+const ITEMS = Array.from({length: 100}).map((_, index) => String(index));
 
 export function Home() {
 	return (
