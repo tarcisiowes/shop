@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
 		gap: 12,
 		borderBottomWidth: 1,
 		borderBottomColor: '#e4e6ec',
-		padding: 12,
+		paddingBottom: 8
 	},
 	clearButton: {
 		marginLeft: 'auto',
