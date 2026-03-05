@@ -10,7 +10,19 @@ const FILTERS_STATUS: FilterStatus[] = [
 	FilterStatus.DONE,
 	FilterStatus.PENDING
 ];
-const ITEMS = Array.from({length: 100}).map((_, index) => String(index));
+
+const ITEMS = [
+	{id: '1', description: 'Coffee', status: FilterStatus.DONE},
+	{id: '2', description: 'Milk', status: FilterStatus.PENDING},
+	{id: '3', description: 'Bread', status: FilterStatus.DONE},
+	{id: '4', description: 'Eggs', status: FilterStatus.PENDING},
+	{id: '5', description: 'Butter', status: FilterStatus.DONE},
+	{id: '6', description: 'Cheese', status: FilterStatus.PENDING},
+	{id: '7', description: 'Fruits', status: FilterStatus.DONE},
+	{id: '8', description: 'Vegetables', status: FilterStatus.PENDING},
+	{id: '9', description: 'Meat', status: FilterStatus.DONE},
+	{id: '10', description: 'Fish', status: FilterStatus.PENDING},
+]
 
 export function Home() {
 	return (
@@ -31,10 +43,10 @@ export function Home() {
 				</View>
 				<FlatList
 					data={ITEMS}
-					keyExtractor={(item) => item}
+					keyExtractor={(item) => item.id}
 					renderItem={({item}) => (
 						<Item
-							data={{status: FilterStatus.DONE, description: 'Coffee'}}
+							data={item}
 							onStatusChange={() => console.log("Status change")}
 							onDelete={() => console.log("Delete")}
 						/>)}/>
