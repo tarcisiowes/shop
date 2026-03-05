@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
 		gap: 12,
 		borderBottomWidth: 1,
 		borderBottomColor: '#e4e6ec',
-		paddingBottom: 8
+		paddingBottom: 16
 	},
 	clearButton: {
 		marginLeft: 'auto',
@@ -42,5 +42,20 @@ export const styles = StyleSheet.create({
 		fontSize: 12,
 		fontWeight: '600',
 		color: '#2c46b1',
-	}
+	},
+	separator: {
+		height: 1,
+		width: '100%',
+		backgroundColor: '#e4e6ec',
+		marginVertical: 8,
+	},
+	listContent: {
+		paddingTop: 24,
+		paddingBottom: 62,
+	},
+	emptyList: {
+		fontSize: 14,
+		color: '#808080',
+		textAlign: 'center',
+	},
 });

@@ -44,6 +44,9 @@ export function Home() {
 				<FlatList
 					data={ITEMS}
 					keyExtractor={(item) => item.id}
+					ItemSeparatorComponent={() => <View style={styles.separator}/>}
+					contentContainerStyle={styles.listContent}
+					ListEmptyComponent={() => <Text style={styles.emptyList}>No items here.</Text>}
 					renderItem={({item}) => (
 						<Item
 							data={item}
