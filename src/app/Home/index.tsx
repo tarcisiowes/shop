@@ -27,12 +27,17 @@ const ITEMS = [
 
 export function Home() {
 	const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
+	const [description, setDescription] = useState<string>('');
 
 	return (
 		<View style={styles.container}>
 			<Image source={require('@/assets/logo.png')} style={styles.Logo}/>
 			<View style={styles.form}>
-				<Input placeholder={'What do you need to buy?'}/>
+				<Input
+					placeholder={'What do you need to buy?'}
+					onChangeText={setDescription}
+					value={description}
+				/>
 				<Button title={'Add'} onPress={() => console.log("Add")}/>
 			</View>
 			<View style={styles.content}>
