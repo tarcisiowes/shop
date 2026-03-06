@@ -28,6 +28,23 @@ const ITEMS = [
 export function Home() {
 	const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
 	const [description, setDescription] = useState<string>('');
+	const [items, setItems] = useState(ITEMS);
+
+	function handleAddItem() {
+		if (!description.trim()) {
+			return Alert.alert("Please enter a description");
+		}
+
+		const item = {
+			id: uuidv4(),
+			description,
+			status: FilterStatus.PENDING
+		}
+
+		setItems(prevState => [...prevState, item]);
+		//add local storage here
+		setDescription('');
+	}
 
 	return (
 		<View style={styles.container}>
@@ -38,7 +55,7 @@ export function Home() {
 					onChangeText={setDescription}
 					value={description}
 				/>
-				<Button title={'Add'} onPress={() => console.log("Add")}/>
+				<Button title={'Add'} onPress={handleAddItem}/>
 			</View>
 			<View style={styles.content}>
 				<View style={styles.header}>
