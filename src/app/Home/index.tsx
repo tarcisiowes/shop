@@ -4,7 +4,8 @@ import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
 import { FilterStatus } from "@/Types/FilterStatus";
 import { useState } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { v4 as uuidv4 } from "uuid";
 import { styles } from "./styles";
 
 const FILTERS_STATUS: FilterStatus[] = [
