@@ -3,6 +3,7 @@ import { Filter } from "@/components/Filter";
 import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
 import { FilterStatus } from "@/Types/FilterStatus";
+import { useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from "./styles";
 
@@ -25,6 +26,8 @@ const ITEMS = [
 ]
 
 export function Home() {
+	const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
+
 	return (
 		<View style={styles.container}>
 			<Image source={require('@/assets/logo.png')} style={styles.Logo}/>
@@ -35,7 +38,12 @@ export function Home() {
 			<View style={styles.content}>
 				<View style={styles.header}>
 					{FILTERS_STATUS.map((status) => (
-						<Filter key={status} status={status} isActive={status === FilterStatus.DONE}/>
+						<Filter
+							key={status}
+							status={status}
+							isActive={status === filter}
+							onPress={() => setFilter(status)}
+						/>
 					))}
 					<TouchableOpacity style={styles.clearButton} onPress={() => console.log("Clear")}>
 						<Text style={styles.clearText}>Clear</Text>
