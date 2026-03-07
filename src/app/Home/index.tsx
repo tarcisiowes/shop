@@ -45,8 +45,9 @@ export function Home() {
 			status: FilterStatus.PENDING
 		}
 
-		setItems(prevState => [...prevState, item]);
-		//add local storage here
+		const newItems = [...items, item];
+		setItems(newItems);
+		AsyncStorage.setItem('@items', JSON.stringify(newItems));
 		setDescription('');
 	}
 
@@ -76,7 +77,7 @@ export function Home() {
 					</TouchableOpacity>
 				</View>
 				<FlatList
-					data={ITEMS}
+					data={items}
 					keyExtractor={(item) => item.id}
 					ItemSeparatorComponent={() => <View style={styles.separator}/>}
 					contentContainerStyle={styles.listContent}
