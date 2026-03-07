@@ -3,7 +3,8 @@ import { Filter } from "@/components/Filter";
 import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
 import { FilterStatus } from "@/Types/FilterStatus";
-import { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
 import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { v4 as uuidv4 } from "uuid";
 import { styles } from "./styles";
@@ -13,23 +14,25 @@ const FILTERS_STATUS: FilterStatus[] = [
 	FilterStatus.PENDING
 ];
 
-const ITEMS = [
-	{id: '1', description: 'Coffee', status: FilterStatus.DONE},
-	{id: '2', description: 'Milk', status: FilterStatus.PENDING},
-	{id: '3', description: 'Bread', status: FilterStatus.DONE},
-	{id: '4', description: 'Eggs', status: FilterStatus.PENDING},
-	{id: '5', description: 'Butter', status: FilterStatus.DONE},
-	{id: '6', description: 'Cheese', status: FilterStatus.PENDING},
-	{id: '7', description: 'Fruits', status: FilterStatus.DONE},
-	{id: '8', description: 'Vegetables', status: FilterStatus.PENDING},
-	{id: '9', description: 'Meat', status: FilterStatus.DONE},
-	{id: '10', description: 'Fish', status: FilterStatus.PENDING},
-]
-
 export function Home() {
 	const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
 	const [description, setDescription] = useState<string>('');
-	const [items, setItems] = useState(ITEMS);
+	const [items, setItems] = useState<{id: string, description: string, status: FilterStatus}[]>([]);
+
+	async function loadItems() {
+		try {
+			const storedItems = await AsyncStorage.getItem('@items');
+			if (storedItems) {
+				setItems(JSON.parse(storedItems));
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	useEffect(() => {
+		loadItems();
+	}, []);
 
 	function handleAddItem() {
 		if (!description.trim()) {
