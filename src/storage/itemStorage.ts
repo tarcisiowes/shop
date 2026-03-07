@@ -27,7 +27,28 @@ async function getItems(): Promise<ItemStorage[]> {
 	}
 }
 
+async function getItemByStatus(status: FilterStatus): Promise<ItemStorage[]> {
+	try {
+		const items = await getItems();
+		return items.filter(item => item.status === status);
+	} catch (error) {
+		throw new Error('getItemByStatus >>> ' + error);
+	}
+}
+
+async function deleteItem(id: string): Promise<void> {
+	try {
+		const items = await getItems();
+		const newItems = items.filter(item => item.id !== id);
+		await saveItems(newItems);
+	} catch (error) {
+		throw new Error('deleteItem >>> ' + error);
+	}
+}
+
 export const ItemStorage = {
 	saveItems,
-	getItems
+	getItems,
+	getItemByStatus,
+	deleteItem
 };
