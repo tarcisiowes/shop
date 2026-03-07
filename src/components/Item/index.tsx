@@ -1,5 +1,5 @@
 import { StatusIcon } from "@/components/StatusIcon";
-import { FilterStatus } from "@/Types/FilterStatus";
+import { FilterStatus } from "@/types/FilterStatus";
 import { Trash2 } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";

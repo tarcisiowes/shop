@@ -1,4 +1,4 @@
-import { FilterStatus } from "@/Types/FilterStatus";
+import { FilterStatus } from "@/types/FilterStatus";
 import { CircleCheck, CircleDashed } from "lucide-react-native";
 
 export function StatusIcon({status}: {status: FilterStatus}) {

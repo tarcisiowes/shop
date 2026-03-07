@@ -1,6 +1,6 @@
 import { styles } from "@/components/Filter/styles";
 import { StatusIcon } from "@/components/StatusIcon";
-import { FilterStatus } from "@/Types/FilterStatus";
+import { FilterStatus } from "@/types/FilterStatus";
 import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 type Props = TouchableOpacityProps & {

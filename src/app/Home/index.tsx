@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { Filter } from "@/components/Filter";
 import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
-import { FilterStatus } from "@/Types/FilterStatus";
+import { FilterStatus } from "@/types/FilterStatus";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
