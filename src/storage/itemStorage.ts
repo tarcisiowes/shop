@@ -17,6 +17,14 @@ async function saveItems(items: ItemStorage[]) {
 	}
 }
 
+async function addItem(newItem: ItemStorage): Promise<ItemStorage[]> {
+	const items = await getItems();
+	const updatedItems = [...items, newItem];
+	await saveItems(updatedItems);
+
+	return updatedItems;
+}
+
 async function getItems(): Promise<ItemStorage[]> {
 	try {
 		const storedItems = await AsyncStorage.getItem(ITEMS_STORAGE_KEY);
@@ -47,7 +55,7 @@ async function deleteItem(id: string): Promise<void> {
 }
 
 export const itemStorage = {
-	saveItems,
+	addItem,
 	getItems,
 	getItemByStatus,
 	deleteItem
