@@ -4,7 +4,6 @@ import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
 import { itemStorage, ItemStorage } from "@/storage/itemStorage";
 import { FilterStatus } from "@/types/FilterStatus";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
 import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { v4 as uuidv4 } from "uuid";
@@ -29,7 +28,7 @@ export function Home() {
 		loadItems();
 	}, []);
 
-	function handleAddItem() {
+	async function handleAddItem() {
 		if (!description.trim()) {
 			return Alert.alert("Please enter a description");
 		}
@@ -42,7 +41,7 @@ export function Home() {
 
 		const newItems = [...items, item];
 		setItems(newItems);
-		AsyncStorage.setItem('@items', JSON.stringify(newItems));
+		await itemStorage.saveItems(newItems);
 		setDescription('');
 	}
 
