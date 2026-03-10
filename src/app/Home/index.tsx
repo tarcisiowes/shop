@@ -19,12 +19,16 @@ export function Home() {
 	const [description, setDescription] = useState<string>('');
 	const [items, setItems] = useState<ItemStorage[]>([]);
 
-	useEffect(() => {
-		async function loadItems() {
+	async function loadItems() {
+		try {
 			const savedItems = await itemStorage.getItems();
 			setItems(savedItems);
+		} catch (error) {
+			Alert.alert("Error loading items", error instanceof Error ? error.message : String(error));
 		}
+	}
 
+	useEffect(() => {
 		loadItems();
 	}, []);
 
@@ -39,9 +43,8 @@ export function Home() {
 			status: FilterStatus.PENDING
 		}
 
-		const newItems = [...items, item];
-		setItems(newItems);
-		await itemStorage.saveItems(newItems);
+		await itemStorage.addItem(item);
+		loadItems();
 		setDescription('');
 	}
 
