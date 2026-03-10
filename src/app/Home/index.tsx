@@ -2,6 +2,7 @@ import { Button } from "@/components/Button";
 import { Filter } from "@/components/Filter";
 import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
+import { itemStorage, ItemStorage } from "@/storage/itemStorage";
 import { FilterStatus } from "@/types/FilterStatus";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from "react";
@@ -17,7 +18,7 @@ const FILTERS_STATUS: FilterStatus[] = [
 export function Home() {
 	const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
 	const [description, setDescription] = useState<string>('');
-	const [items, setItems] = useState<{id: string, description: string, status: FilterStatus}[]>([]);
+	const [items, setItems] = useState<ItemStorage[]>([]);
 
 	async function loadItems() {
 		try {
