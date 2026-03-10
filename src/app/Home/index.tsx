@@ -31,7 +31,7 @@ export function Home() {
 	}
 
 	useEffect(() => {
-		loadItems();
+		itemStorage.getItems();
 	}, []);
 
 	function handleAddItem() {

@@ -46,7 +46,7 @@ async function deleteItem(id: string): Promise<void> {
 	}
 }
 
-export const ItemStorage = {
+export const itemStorage = {
 	saveItems,
 	getItems,
 	getItemByStatus,
