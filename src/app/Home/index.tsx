@@ -20,19 +20,13 @@ export function Home() {
 	const [description, setDescription] = useState<string>('');
 	const [items, setItems] = useState<ItemStorage[]>([]);
 
-	async function loadItems() {
-		try {
-			const storedItems = await AsyncStorage.getItem('@items');
-			if (storedItems) {
-				setItems(JSON.parse(storedItems));
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	}
-
 	useEffect(() => {
-		itemStorage.getItems();
+		async function loadItems() {
+			const savedItems = await itemStorage.getItems();
+			setItems(savedItems);
+		}
+
+		loadItems();
 	}, []);
 
 	function handleAddItem() {
