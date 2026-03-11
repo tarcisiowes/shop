@@ -21,16 +21,16 @@ export function Home() {
 
 	async function loadItems() {
 		try {
-			const savedItems = await itemStorage.getItems();
+			const savedItems = await itemStorage.getItemByStatus(filter);
 			setItems(savedItems);
 		} catch (error) {
 			Alert.alert("Error loading items", error instanceof Error ? error.message : String(error));
 		}
-	}
+	};
 
 	useEffect(() => {
 		loadItems();
-	}, []);
+	}, [filter]);
 
 	async function handleAddItem() {
 		if (!description.trim()) {
@@ -44,8 +44,14 @@ export function Home() {
 		}
 
 		await itemStorage.addItem(item);
-		loadItems();
+
+		filter === FilterStatus.PENDING
+			? loadItems()
+			: setFilter(FilterStatus.PENDING);
 		setDescription('');
+		Alert.alert("Successfully added!",
+			`"${item.description}" has been added to your list.`
+		);
 	}
 
 	return (
