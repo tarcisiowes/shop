@@ -90,6 +90,17 @@ export function Home() {
 		]);
 	}
 
+	async function handleStatusChange(id: string): Promise<void> {
+		try {
+			await itemStorage.toggleItemStatus(id);
+			await loadItems()
+		} catch (error) {
+			Alert.alert("Error updating item status", error instanceof Error ? error.message : String(error));
+			throw error;
+		}
+
+	}
+
 	return (
 		<View style={styles.container}>
 			<Image source={require('@/assets/logo.png')} style={styles.Logo}/>
@@ -124,7 +135,7 @@ export function Home() {
 					renderItem={({item}) => (
 						<Item
 							data={item}
-							onStatusChange={() => console.log("Status change")}
+							onStatusChange={() => handleStatusChange(item.id)}
 							onDelete={() => handleRemoveItem(item.id)}
 						/>)}/>
 			</View>
