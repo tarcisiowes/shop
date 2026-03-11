@@ -4,9 +4,9 @@ import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
 import { itemStorage, ItemStorage } from "@/storage/itemStorage";
 import { FilterStatus } from "@/types/FilterStatus";
+import * as Crypto from 'expo-crypto';
 import { useEffect, useState } from "react";
 import { Alert, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { v4 as uuidv4 } from "uuid";
 import { styles } from "./styles";
 
 const FILTERS_STATUS: FilterStatus[] = [
@@ -38,7 +38,7 @@ export function Home() {
 		}
 
 		const item = {
-			id: uuidv4(),
+			id: Crypto.randomUUID(),
 			description,
 			status: FilterStatus.PENDING
 		}
