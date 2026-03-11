@@ -19,9 +19,9 @@ export function Home() {
 	const [description, setDescription] = useState<string>('');
 	const [items, setItems] = useState<ItemStorage[]>([]);
 
-	async function loadItems() {
+	async function loadItems(): Promise<void> {
 		try {
-			const savedItems = await itemStorage.getItemByStatus(filter);
+			const savedItems: ItemStorage[] = await itemStorage.getItemByStatus(filter);
 			setItems(savedItems);
 		} catch (error) {
 			Alert.alert("Error loading items", error instanceof Error ? error.message : String(error));
@@ -32,7 +32,7 @@ export function Home() {
 		loadItems();
 	}, [filter]);
 
-	async function handleAddItem() {
+	async function handleAddItem(): Promise<void> {
 		if (!description.trim()) {
 			return Alert.alert("Please enter a description");
 		}
@@ -54,7 +54,7 @@ export function Home() {
 		);
 	}
 
-	async function handleRemoveItem(id: string) {
+	async function handleRemoveItem(id: string): Promise<void> {
 		Alert.alert('Delete Item', 'Are you sure you want to delete this item?', [
 			{
 				text: 'Cancel',
@@ -63,7 +63,7 @@ export function Home() {
 			{
 				text: 'Delete',
 				style: 'destructive',
-				onPress: async () => {
+				onPress: async (): Promise<void> => {
 					await itemStorage.deleteItem(id);
 					loadItems();
 					Alert.alert('Item deleted successfully');
@@ -72,7 +72,7 @@ export function Home() {
 		]);
 	}
 
-	async function handleClearItems() {
+	async function handleClearItems(): Promise<void> {
 		Alert.alert('Clear Items', 'Are you sure you want to clear all items?', [
 			{
 				text: 'Cancel',
@@ -81,7 +81,7 @@ export function Home() {
 			{
 				text: 'Clear',
 				style: 'destructive',
-				onPress: async () => {
+				onPress: async (): Promise<void> => {
 					await itemStorage.clearItems();
 					setItems([]);
 					Alert.alert('All items cleared successfully');
