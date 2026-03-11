@@ -1,6 +1,6 @@
+import { AddProductModal } from "@/components/AddProductModal";
 import { Button } from "@/components/Button";
 import { Filter } from "@/components/Filter";
-import { Input } from "@/components/Input";
 import { Item } from "@/components/Item";
 import { itemStorage, ItemStorage } from "@/storage/itemStorage";
 import { FilterStatus } from "@/types/FilterStatus";
@@ -16,8 +16,8 @@ const FILTERS_STATUS: FilterStatus[] = [
 
 export function Home() {
 	const [filter, setFilter] = useState<FilterStatus>(FilterStatus.PENDING);
-	const [description, setDescription] = useState<string>('');
 	const [items, setItems] = useState<ItemStorage[]>([]);
+	const [modalVisible, setModalVisible] = useState(false);
 
 	async function loadItems(): Promise<void> {
 		try {
@@ -32,7 +32,7 @@ export function Home() {
 		loadItems();
 	}, [filter]);
 
-	async function handleAddItem(): Promise<void> {
+	async function handleAddItemModal(description: string, date: Date, time: Date): Promise<void> {
 		if (!description.trim()) {
 			return Alert.alert("Please enter a description");
 		}
@@ -40,15 +40,16 @@ export function Home() {
 		const item = {
 			id: Crypto.randomUUID(),
 			description,
-			status: FilterStatus.PENDING
-		}
+			status: FilterStatus.PENDING,
+			date: date.toISOString(), // Optionally store date/time
+			time: time.toISOString(),
+		};
 
 		await itemStorage.addItem(item);
 
 		filter === FilterStatus.PENDING
 			? loadItems()
 			: setFilter(FilterStatus.PENDING);
-		setDescription('');
 		Alert.alert("Successfully added!",
 			`"${item.description}" has been added to your list.`
 		);
@@ -105,12 +106,7 @@ export function Home() {
 		<View style={styles.container}>
 			<Image source={require('@/assets/logo.png')} style={styles.Logo}/>
 			<View style={styles.form}>
-				<Input
-					placeholder={'What do you need to buy?'}
-					onChangeText={setDescription}
-					value={description}
-				/>
-				<Button title={'Add'} onPress={handleAddItem}/>
+				<Button title={'Add'} onPress={() => setModalVisible(true)}/>
 			</View>
 			<View style={styles.content}>
 				<View style={styles.header}>
@@ -139,6 +135,11 @@ export function Home() {
 							onDelete={() => handleRemoveItem(item.id)}
 						/>)}/>
 			</View>
+			<AddProductModal
+				visible={modalVisible}
+				onClose={() => setModalVisible(false)}
+				onAdd={handleAddItemModal}
+			/>
 		</View>
 	);
 }
