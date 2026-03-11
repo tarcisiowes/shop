@@ -54,9 +54,18 @@ async function deleteItem(id: string): Promise<void> {
 	}
 }
 
+async function clearItems(): Promise<void> {
+	try {
+		await AsyncStorage.removeItem(ITEMS_STORAGE_KEY);
+	} catch (error) {
+		throw new Error('clearItems >>> ' + error);
+	}
+}
+
 export const itemStorage = {
 	addItem,
 	getItems,
 	getItemByStatus,
-	deleteItem
+	deleteItem,
+	clearItems
 };

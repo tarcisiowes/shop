@@ -72,6 +72,24 @@ export function Home() {
 		]);
 	}
 
+	async function handleClearItems() {
+		Alert.alert('Clear Items', 'Are you sure you want to clear all items?', [
+			{
+				text: 'Cancel',
+				style: 'cancel'
+			},
+			{
+				text: 'Clear',
+				style: 'destructive',
+				onPress: async () => {
+					await itemStorage.clearItems();
+					setItems([]);
+					Alert.alert('All items cleared successfully');
+				}
+			}
+		]);
+	}
+
 	return (
 		<View style={styles.container}>
 			<Image source={require('@/assets/logo.png')} style={styles.Logo}/>
@@ -93,7 +111,7 @@ export function Home() {
 							onPress={() => setFilter(status)}
 						/>
 					))}
-					<TouchableOpacity style={styles.clearButton} onPress={() => console.log("Clear")}>
+					<TouchableOpacity style={styles.clearButton} onPress={() => handleClearItems()}>
 						<Text style={styles.clearText}>Clear</Text>
 					</TouchableOpacity>
 				</View>
