@@ -54,6 +54,24 @@ export function Home() {
 		);
 	}
 
+	async function handleRemoveItem(id: string) {
+		Alert.alert('Delete Item', 'Are you sure you want to delete this item?', [
+			{
+				text: 'Cancel',
+				style: 'cancel'
+			},
+			{
+				text: 'Delete',
+				style: 'destructive',
+				onPress: async () => {
+					await itemStorage.deleteItem(id);
+					loadItems();
+					Alert.alert('Item deleted successfully');
+				}
+			}
+		]);
+	}
+
 	return (
 		<View style={styles.container}>
 			<Image source={require('@/assets/logo.png')} style={styles.Logo}/>
@@ -89,7 +107,7 @@ export function Home() {
 						<Item
 							data={item}
 							onStatusChange={() => console.log("Status change")}
-							onDelete={() => console.log("Delete")}
+							onDelete={() => handleRemoveItem(item.id)}
 						/>)}/>
 			</View>
 		</View>
