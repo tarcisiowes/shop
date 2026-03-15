@@ -10,7 +10,6 @@ describe('AddProductModal', () => {
 		const {getByText} = render(
 			<AddProductModal visible={true} onClose={onClose} onAdd={onAdd}/>
 		);
-		console.log('getByText:', getByText);
 		expect(getByText('Product Description')).toBeTruthy();
 	});
 
@@ -18,7 +17,6 @@ describe('AddProductModal', () => {
 		const {queryByText} = render(
 			<AddProductModal visible={false} onClose={onClose} onAdd={onAdd}/>
 		);
-		console.log('queryByText:', queryByText);
 		expect(queryByText('Product Description')).toBeNull();
 	});
 
@@ -26,9 +24,7 @@ describe('AddProductModal', () => {
 		const {getByText} = render(
 			<AddProductModal visible={true} onClose={onClose} onAdd={onAdd}/>
 		);
-		console.log('getByText:', getByText);
 		fireEvent.press(getByText('Cancel'));
-		console.log('onClose:', onClose);
 		expect(onClose).toHaveBeenCalled();
 	});
 
